@@ -4,17 +4,82 @@ html, body {
   font-family: 'Manrope', sans-serif;
 }
 
+/* --- Site Layout --- */
+
 body {
-  margin: 1em;
+  display: grid;
+  grid-template-columns: 1em 1fr 1em;
+  grid-template-areas: 
+  '. .... .'
+  '. head .'
+  '. main .'
+  '. foot .'
+  '. .... .';
+  gap: 1em 0;
 }
 
-/* --- Layout --- */
+.site-header {
+  grid-area: head;
+}
+
+footer {
+  grid-area: foot;
+}
+
+/* --- Element Layout --- */
 
 main {
+  grid-area: main;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
+  grid-template-areas: 
+  'tech'
+  'envi'
+  'nasa'
+  'phys'
+  'heal';
 }
+
+@media (min-width: 600px) {
+  main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+  'tech tech'
+  'envi nasa'
+  'phys nasa'
+  'heal heal';
+  }
+}
+
+@media (min-width: 870px) {
+  main {
+    grid-template-columns: repeat(9, 1fr) repeat(3, minmax(70px, 1fr));
+    grid-template-areas: 
+  'tech tech tech tech tech tech envi envi envi nasa nasa nasa'
+  'phys phys phys heal heal heal heal heal heal nasa nasa nasa';
+  }
+}
+
+.technology {
+  grid-area: tech;
+}
+
+.environment {
+  grid-area: envi;
+}
+    
+.nasa {
+  grid-area: nasa;
+}
+
+.physics { 
+  grid-area: phys;
+}
+
+.health {
+  grid-area: heal;
+} 
 
 /* --- Article Card --- */
 
@@ -81,53 +146,4 @@ img {
   width: 100%;
   border-top-left-radius: .2em;
   border-top-right-radius: .2em;
-}
-
-/* --- Media Queries --- */
-
-@media (min-width: 500px) {
-  main {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .technology {
-    grid-column: span 2;
-  }
-
-  .nasa {
-    grid-row: span 2;
-  }
-
-
-  .health {
-    grid-column: span 2;
-  }
-  
-}
-
-@media (min-width: 870px) {
-  main {
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .technology {
-    grid-column: 1 / 7;
-  }
-
-  .environment {
-    grid-column: 7 / 10;
-  }
-
-  .nasa {
-    grid-column: 10 / -1;
-  }
-
-  .physics {
-    grid-column: 1 / 4;
-  }
-
-  .health {
-    grid-column: 4 / 10;
-  }
-  
 }
